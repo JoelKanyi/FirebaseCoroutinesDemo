@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "490430944413",
+    "project_id": "fir-coroutinesdemo",
+    "storage_bucket": "fir-coroutinesdemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490430944413:android:4aa5a8800fb2f4dbbcb074",
+        "android_client_info": {
+          "package_name": "com.kanyideveloper.firebasecoroutinesdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490430944413-79gdn6qnkr1g2js9cj1fb0a5734amv8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqbNKcD4mF_e_KQiWhujRHIs6MoLKVGCQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490430944413-79gdn6qnkr1g2js9cj1fb0a5734amv8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
