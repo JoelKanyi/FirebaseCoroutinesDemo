@@ -23,7 +23,6 @@ class MainRepository {
         return withContext(Dispatchers.IO) {
             safeCall {
                 val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-                firebaseAuth.currentUser?.sendEmailVerification()?.await()
                 val uid = result.user?.uid!!
                 val user = User(name, email, phone)
                 databaseReference.child(uid).setValue(user).await()
@@ -40,5 +39,4 @@ class MainRepository {
             }
         }
     }
-
 }

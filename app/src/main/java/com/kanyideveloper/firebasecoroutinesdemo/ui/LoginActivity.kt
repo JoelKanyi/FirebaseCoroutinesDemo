@@ -1,4 +1,4 @@
-package com.kanyideveloper.firebasecoroutinesdemo
+package com.kanyideveloper.firebasecoroutinesdemo.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,8 +7,6 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.kanyideveloper.firebasecoroutinesdemo.databinding.ActivityLoginBinding
-import com.kanyideveloper.firebasecoroutinesdemo.databinding.ActivityRegisterBinding
-import com.kanyideveloper.firebasecoroutinesdemo.repository.MainRepository
 import com.kanyideveloper.firebasecoroutinesdemo.util.Resource
 import com.kanyideveloper.firebasecoroutinesdemo.viewmodel.MainViewModel
 
@@ -39,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is Resource.Success -> {
                     binding.loginProgressBar.isVisible = false
-                    Toast.makeText(applicationContext, it.data.toString(), Toast.LENGTH_SHORT)
+                    Toast.makeText(applicationContext, "Logged In Successfully", Toast.LENGTH_SHORT)
                         .show()
                 }
                 is Resource.Error -> {

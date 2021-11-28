@@ -1,6 +1,5 @@
 package com.kanyideveloper.firebasecoroutinesdemo.viewmodel
 
-import android.app.Application
 import android.util.Patterns
 import androidx.lifecycle.*
 import com.google.firebase.auth.AuthResult
@@ -9,8 +8,7 @@ import com.kanyideveloper.firebasecoroutinesdemo.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(
-) : ViewModel() {
+class MainViewModel : ViewModel() {
 
     private val _registerStatus = MutableLiveData<Resource<AuthResult>>()
     val registerStatus: LiveData<Resource<AuthResult>> = _registerStatus
