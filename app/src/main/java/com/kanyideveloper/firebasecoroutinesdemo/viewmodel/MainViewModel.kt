@@ -10,48 +10,43 @@ import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
 
-    private val _registerStatus = MutableLiveData<Resource<AuthResult>>()
-    val registerStatus: LiveData<Resource<AuthResult>> = _registerStatus
+    private val _userRegistrationStatus = MutableLiveData<Resource<AuthResult>>()
+    val userRegistrationStatus: LiveData<Resource<AuthResult>> = _userRegistrationStatus
 
-    private val _loginStatus = MutableLiveData<Resource<AuthResult>>()
-    val loginStatus: LiveData<Resource<AuthResult>> = _loginStatus
+    private val _userSignUpStatus = MutableLiveData<Resource<AuthResult>>()
+    val userSignUpStatus: LiveData<Resource<AuthResult>> = _userSignUpStatus
 
-    private val repository = MainRepository()
+    private val mainRepository = MainRepository()
 
 
-    fun registerUser(
-        name: String,
-        email: String,
-        phone: String,
-        password: String
-    ) {
+    fun createUser(userName: String, userEmailAddress: String, userPhoneNum: String, userLoginPassword: String) {
         var error =
-            if (email.isEmpty() || name.isEmpty() || password.isEmpty() || phone.isEmpty()) {
+            if (userEmailAddress.isEmpty() || userName.isEmpty() || userLoginPassword.isEmpty() || userPhoneNum.isEmpty()) {
                 "Empty Strings"
-            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(userEmailAddress).matches()) {
                 "Not a valid Email"
             } else null
 
         error?.let {
-            _registerStatus.postValue(Resource.Error(it))
+            _userRegistrationStatus.postValue(Resource.Error(it))
             return
         }
-        _registerStatus.postValue(Resource.Loading())
+        _userRegistrationStatus.postValue(Resource.Loading())
 
         viewModelScope.launch(Dispatchers.Main) {
-            val result = repository.register(name, email, phone, password)
-            _registerStatus.postValue(result)
+            val registerResult = mainRepository.createUser(userName = userName, userEmailAddress = userEmailAddress, userPhoneNum = userPhoneNum, userLoginPassword = userLoginPassword)
+            _userRegistrationStatus.postValue(registerResult)
         }
     }
 
-    fun loginUser(email: String, password: String) {
-        if (email.isEmpty() || password.isEmpty()) {
-            _loginStatus.postValue(Resource.Error("Empty Strings"))
+    fun signInUser(userEmailAddress: String, userLoginPassword: String) {
+        if (userEmailAddress.isEmpty() || userLoginPassword.isEmpty()) {
+            _userSignUpStatus.postValue(Resource.Error("Empty Strings"))
         } else {
-            _loginStatus.postValue(Resource.Loading())
+            _userSignUpStatus.postValue(Resource.Loading())
             viewModelScope.launch(Dispatchers.Main) {
-                val result = repository.login(email, password)
-                _loginStatus.postValue(result)
+                val loginResult = mainRepository.login(userEmailAddress, userLoginPassword)
+                _userSignUpStatus.postValue(loginResult)
             }
         }
     }

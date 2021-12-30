@@ -22,16 +22,16 @@ class RegisterActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        binding.buttonRegister.setOnClickListener {
-            viewModel.registerUser(
-                binding.editTextName.editText?.text.toString(),
-                binding.editTextEmail.editText?.text.toString(),
-                binding.editTextPhone.editText?.text.toString(),
-                binding.editTextPassword.editText?.text.toString()
+        binding.userRegisterButton.setOnClickListener {
+            viewModel.createUser(
+                binding.edxtUserName.editText?.text.toString(),
+                binding.edxtEmailAddress.editText?.text.toString(),
+                binding.edxtPhoneNum.editText?.text.toString(),
+                binding.edxtPassword.editText?.text.toString()
             )
         }
 
-        viewModel.registerStatus.observe(this, Observer {
+        viewModel.userRegistrationStatus.observe(this, Observer {
             when (it) {
                 is Resource.Loading -> {
                     binding.registerProgress.isVisible = true

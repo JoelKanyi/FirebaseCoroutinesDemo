@@ -14,19 +14,14 @@ class MainRepository {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val databaseReference = FirebaseDatabase.getInstance().getReference("users")
 
-    suspend fun register(
-        name: String,
-        email: String,
-        phone: String,
-        password: String
-    ): Resource<AuthResult> {
+    suspend fun createUser(userName: String, userEmailAddress: String, userPhoneNum: String, userLoginPassword: String): Resource<AuthResult> {
         return withContext(Dispatchers.IO) {
             safeCall {
-                val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-                val uid = result.user?.uid!!
-                val user = User(name, email, phone)
-                databaseReference.child(uid).setValue(user).await()
-                Resource.Success(result)
+                val registrationResult = firebaseAuth.createUserWithEmailAndPassword(userEmailAddress, userLoginPassword).await()
+                val userId = registrationResult.user?.uid!!
+                val newUser = User(userName, userEmailAddress, userPhoneNum)
+                databaseReference.child(userId).setValue(newUser).await()
+                Resource.Success(registrationResult)
             }
         }
     }
